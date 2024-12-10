@@ -3,6 +3,7 @@ import React from 'react';
 function Footer() {
   return (
     <footer
+    id='footer'
       className="py-4 fixed bottom-0 left-0 w-full"
       style={{
         backgroundColor: '#333333', // Charcoal background

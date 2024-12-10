@@ -80,6 +80,11 @@ function Detection() {
     }
   };
 
+  // Function to always return "No flood risk"
+  const getFloodMessage = () => {
+    return "No flood risk at the moment."; // Static message for all cities
+  };
+
   return (
     <div className="py-20 bg-gray-100">
       <h1 className="text-3xl font-bold text-center text-blue-500">Flood Detection</h1>
@@ -126,6 +131,8 @@ function Detection() {
             <h2 className="text-xl font-semibold">{result.city}</h2>
             <p>Temperature: {result.temperature}°C</p>
             <p>Windspeed: {result.windspeed} km/h</p>
+            {/* Display Flood Message */}
+            <p className="mt-2 text-center text-blue-500 font-semibold">{getFloodMessage()}</p>
           </div>
         ))}
       </div>
@@ -144,6 +151,8 @@ function Detection() {
               No weather data available.
             </p>
           )}
+          {/* Display Flood Message */}
+          <p className="mt-2 text-center text-blue-500 font-semibold">{getFloodMessage()}</p>
         </div>
       ))}
     </div>

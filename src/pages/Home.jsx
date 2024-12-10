@@ -28,8 +28,8 @@ function Home() {
             top: '-10%',
             left: `${leftPosition}%`,
             width: `${size}px`,
-            height: `${size * 8}px`,
-            backgroundColor: 'rgba(0, 0, 255, 0.5)', 
+            height: `${size * 10}px`,
+            backgroundColor: 'rgba(70, 130, 180, 0.5)',  // Steel Blue with opacity
             borderRadius: '50%',
             animation: `fall ${duration}s linear infinite`,
             animationDelay: `${delay}s`,
