@@ -19,7 +19,7 @@ function Detection() {
       try {
         const weatherPromises = CITIES.map((city) =>
           fetch(
-            `http://api.weatherstack.com/current?access_key=${WEATHER_API_KEY}&query=${city}`
+            `https://api.weatherstack.com/current?access_key=${WEATHER_API_KEY}&query=${city}`
           ).then((response) => response.json())
         );
 
