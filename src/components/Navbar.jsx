@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Lottie from "lottie-react";
+import animationData from '../animations/Animation - 1733855543717.json';
 
 function Navbar() {
   return (
@@ -10,11 +12,22 @@ function Navbar() {
         color: '#b2ebf2', // Pale blue text
       }}
     >
-      <div className="container mx-auto flex justify-between">
-        <h1 className="text-xl font-bold" style={{ color: '#b2ebf2' }}>
-          FloodGuard HQ
-        </h1>
-        <div className="flex space-x-4">
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo and Title Section */}
+        <div className="flex items-center space-x-4">
+          {/* Lottie Animation as Logo */}
+          <div className="w-16 h-16 flex-shrink-0">
+            <Lottie animationData={animationData} loop={true} style={{ width: '100%', height: '100%' }} />
+          </div>
+
+          {/* Brand Name */}
+          <h1 className="text-xl font-bold" style={{ color: '#b2ebf2' }}>
+            FloodGuard HQ
+          </h1>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="flex items-center space-x-4">
           <Link
             to="/"
             className="hover:underline"
@@ -64,7 +77,6 @@ function Navbar() {
           >
             Map
           </Link>
-          
         </div>
       </div>
     </nav>

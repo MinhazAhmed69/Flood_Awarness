@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Lottie from "lottie-react";
+import animationData from '../animations/Animation - 1733855164334.json';
 
 function Contact() {
   // State for form inputs
@@ -31,16 +32,20 @@ function Contact() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e0f7fa', color: '#333333' }}>
       {/* Page Title Section */}
-      <div className="text-center pt-20 pb-12" style={{ backgroundColor: '#b2ebf2' }}>
+      <div
+        className="text-center pt-20 pb-12"
+        style={{ backgroundColor: '#b2ebf2' }}
+      >
         <h1 className="text-4xl md:text-5xl font-semibold mb-4" style={{ color: '#333333' }}>
           Contact Us & Safety Information
         </h1>
       </div>
 
-      {/* Contact Form */}
-      <div className="max-w-4xl mx-auto px-6 py-8">
+      {/* Contact Form with Animation */}
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-8 gap-8">
+        {/* Contact Form */}
         <form
-          className="bg-white p-6 rounded-lg shadow-md"
+          className="flex-1 bg-white p-6 rounded-lg shadow-md"
           onSubmit={handleSubmit}
         >
           <h2 className="text-2xl font-semibold text-center mb-4" style={{ color: '#333333' }}>
@@ -94,28 +99,37 @@ function Contact() {
           </button>
         </form>
 
-        {/* Confirmation Message */}
-        {submitted && (
-          <div className="mt-6 max-w-md mx-auto bg-green-100 p-4 text-green-700 rounded-lg shadow">
-            <p className="text-center font-medium">
-              Thank you for reaching out! We will get back to you as soon as possible.
-            </p>
-          </div>
-        )}
-
-        {/* Helpline Numbers */}
-        <div className="bg-white p-6 rounded-lg shadow-md mt-10">
-          <h2 className="text-2xl font-semibold text-charcoal mb-4">Emergency Helplines in India</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            <li><strong>National Disaster Helpline:</strong> 1078</li>
-            <li><strong>Police:</strong> 100</li>
-            <li><strong>Ambulance:</strong> 102</li>
-            <li><strong>Fire:</strong> 101</li>
-            <li><strong>Flood Control Room:</strong> 1070</li>
-            <li><strong>Child Helpline:</strong> 1098</li>
-            <li><strong>Women Helpline:</strong> 181</li>
-          </ul>
+        {/* Lottie Animation */}
+        <div className="flex-1 flex justify-center items-center">
+          <Lottie
+            animationData={animationData}
+            loop={true}
+            style={{ height: 400, width: 400 }}
+          />
         </div>
+      </div>
+
+      {/* Confirmation Message */}
+      {submitted && (
+        <div className="mt-6 max-w-md mx-auto bg-green-100 p-4 text-green-700 rounded-lg shadow">
+          <p className="text-center font-medium">
+            Thank you for reaching out! We will get back to you as soon as possible.
+          </p>
+        </div>
+      )}
+
+      {/* Helpline Numbers */}
+      <div className="bg-white p-6 rounded-lg shadow-md mt-10 max-w-4xl mx-auto">
+        <h2 className="text-2xl font-semibold text-charcoal mb-4">Emergency Helplines in India</h2>
+        <ul className="list-disc list-inside text-gray-700">
+          <li><strong>National Disaster Helpline:</strong> 1078</li>
+          <li><strong>Police:</strong> 100</li>
+          <li><strong>Ambulance:</strong> 102</li>
+          <li><strong>Fire:</strong> 101</li>
+          <li><strong>Flood Control Room:</strong> 1070</li>
+          <li><strong>Child Helpline:</strong> 1098</li>
+          <li><strong>Women Helpline:</strong> 181</li>
+        </ul>
       </div>
 
       {/* Footer Section */}

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const Chatbot = () => {
-  const [messages, setMessages] = useState([{ sender: 'bot', text: 'Hi! How can I assist you today?' }]);
+  const [messages, setMessages] = useState([
+    { sender: 'bot', text: 'Hi! How can I assist you today?' }
+  ]);
   const [input, setInput] = useState('');
   const [context, setContext] = useState(''); // Track the context of the conversation
   const messagesEndRef = useRef(null);
@@ -49,7 +51,7 @@ const Chatbot = () => {
       return "You can reach our support team on the Contact Us page. They are available 24/7 to assist you.";
     } else if (lowerCaseMessage.includes('bye')) {
       return "Goodbye! Stay safe and let me know if you need further assistance.";
-    } 
+    }
 
     // Handling sub-questions
     if (context.includes('flood') && lowerCaseMessage.includes('safety')) {
@@ -75,8 +77,17 @@ const Chatbot = () => {
       <div className="h-full flex flex-col">
         <div className="flex-1 overflow-y-auto">
           {messages.map((msg, index) => (
-            <div key={index} className={`p-2 my-2 ${msg.sender === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-black'}`}>
-              <p>{msg.sender === 'user' ? 'You: ' : 'Bot: '} {msg.text}</p>
+            <div
+              key={index}
+              className={`p-2 my-2 ${
+                msg.sender === 'user'
+                  ? 'bg-blue-500 text-white self-end'
+                  : 'bg-gray-200 text-black'
+              }`}
+            >
+              <p>
+                {msg.sender === 'user' ? 'You: ' : 'Mira.AI: '} {msg.text}
+              </p>
             </div>
           ))}
           <div ref={messagesEndRef} />
