@@ -8,6 +8,7 @@ import News from './pages/News';
 import Map from './pages/MapComponent';
 import Contact from './pages/Contact';
 import Alert from './pages/Alerts';
+import Detection from './pages/Detection';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             {/* Route for Home */}
             <Route path="/" element={<Home />} />
             {/* Route for Weather */}
+            <Route path="/detection" element={< Detection/>} />
             <Route path="/weather" element={<Weather />} />
             {/* Route for News */}
             <Route path="/news" element={<News />} />
