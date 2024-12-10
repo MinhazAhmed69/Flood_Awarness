@@ -30,10 +30,9 @@ function Alerts() {
           setSuccessMessage(true);
           new Notification('Subscription Successful!', {
             body: 'You are now subscribed to flood alerts.',
-            icon: 'https://via.placeholder.com/128', // Replace with your app icon
+            icon: 'https://via.placeholder.com/128', 
           });
 
-          // Automatically hide success message after 4 seconds
           setTimeout(() => setSuccessMessage(false), 4000);
         } else if (permission === 'denied') {
           setNotificationStatus('Notifications are blocked. You won’t receive alerts.');
@@ -47,9 +46,10 @@ function Alerts() {
   };
 
   return (
-    <div className="py-20 bg-yellow-100 min-h-screen flex items-center justify-center">
+    <div className="py-20 min-h-screen flex items-center justify-center">
       <div
         className="max-w-4xl bg-white shadow-lg rounded-lg p-8 md:p-12 w-full transition transform duration-500 ease-in-out hover:scale-105"
+        style={{ color: '#333333' }} // Set text color to charcoal
       >
         {/* Header Section */}
         <div className="flex items-center justify-start space-x-3 mb-6 border-b pb-4">
@@ -58,7 +58,7 @@ function Alerts() {
         </div>
 
         {/* Description */}
-        <p className="text-gray-700 mb-4 text-lg leading-relaxed text-center md:text-left">
+        <p className="text-lg leading-relaxed text-center md:text-left" style={{ color: '#333333' }}>
           Stay informed about potential flood risks in your area. Receive timely updates, early warnings,
           and safety tips to prepare in case of emergencies.
         </p>
@@ -141,17 +141,9 @@ function Alerts() {
       {successMessage && (
         <div
           className="fixed top-4 right-4 bg-green-100 border border-green-300 p-4 rounded shadow-lg transition transform duration-500 ease-in-out animate-fade-out"
+          style={{ color: '#333333' }}
         >
           <p className="text-green-800 font-semibold">You have successfully subscribed!</p>
-        </div>
-      )}
-
-      {/* Notification Status */}
-      {notificationStatus && (
-        <div
-          className="fixed bottom-4 right-4 bg-white p-4 rounded shadow-lg border border-gray-300 transition transform duration-500 ease-in-out"
-        >
-          <p className="text-gray-700">{notificationStatus}</p>
         </div>
       )}
     </div>
