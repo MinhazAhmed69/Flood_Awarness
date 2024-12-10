@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../src/App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -9,31 +9,47 @@ import News from './pages/News';
 import Map from './pages/MapComponent';
 import Contact from './pages/Contact';
 import Alert from './pages/Alerts';
-import Detection from './pages/Detection'
+import Detection from './pages/Detection';
+import Chatbot from './components/Chatbot';
 
 function App() {
+  const [chatbotVisible, setChatbotVisible] = useState(false); // State to manage chatbot visibility
+
+  const toggleChatbot = () => {
+    setChatbotVisible(!chatbotVisible); // Toggle chatbot visibility
+  };
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-blue-50">
         {/* Navbar */}
         <Navbar />
-        
+
         {/* Routes */}
         <main className="flex-grow container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/detection" element={<Detection />} />  {/* Keep the Detection route */}
+            <Route path="/detection" element={<Detection />} />
             <Route path="/weather" element={<Weather />} />
             <Route path="/news" element={<News />} />
             <Route path="/map" element={<Map />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/alerts" element={<Alert />} />
-          
           </Routes>
         </main>
-        
+
         {/* Footer */}
         <Footer />
+
+        {/* Chatbot Bubble */}
+        <div 
+          onClick={toggleChatbot} 
+          className="fixed bottom-4 right-4 bg-[#97e7f5] text-[#36454F] p-4 rounded-full cursor-pointer shadow-lg"                         >
+          <p>Mira.AI</p>
+        </div>
+
+        {/* Conditionally render Chatbot */}
+        {chatbotVisible && <Chatbot />}
       </div>
     </Router>
   );

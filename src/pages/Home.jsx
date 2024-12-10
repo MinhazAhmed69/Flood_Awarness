@@ -27,7 +27,7 @@ function Home() {
             left: `${leftPosition}%`,
             width: `${size}px`,
             height: `${size * 8}px`,
-            backgroundColor: 'rgba(135, 206, 250)', // Light SkyBlue color with 50% opacity
+            backgroundColor: 'rgba(0, 0, 255, 0.5)', // Light blue raindrop
             borderRadius: '50%',
             animation: `fall ${duration}s linear infinite`,
             animationDelay: `${delay}s`,
