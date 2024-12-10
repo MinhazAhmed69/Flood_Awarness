@@ -77,6 +77,14 @@ function Navbar() {
           >
             Map
           </Link>
+          {/* New Donation Page Link */}
+          <Link
+            to="/donate"
+            className="hover:underline"
+            style={{ color: '#b2ebf2' }}
+          >
+            Donate
+          </Link>
         </div>
       </div>
     </nav>

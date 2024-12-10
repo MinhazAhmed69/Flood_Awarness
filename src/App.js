@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../src/App.css'
+import '../src/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -10,13 +10,14 @@ import Map from './pages/MapComponent';
 import Contact from './pages/Contact';
 import Alert from './pages/Alerts';
 import Detection from './pages/Detection';
+import DonationPage from './pages/Donation'; // Import the donation page
 import Chatbot from './components/Chatbot';
 
 function App() {
-  const [chatbotVisible, setChatbotVisible] = useState(false); // State to manage chatbot visibility
+  const [chatbotVisible, setChatbotVisible] = useState(false);
 
   const toggleChatbot = () => {
-    setChatbotVisible(!chatbotVisible); // Toggle chatbot visibility
+    setChatbotVisible(!chatbotVisible);
   };
 
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/map" element={<Map />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/alerts" element={<Alert />} />
+            <Route path="/donate" element={<DonationPage />} /> {/* Added Donation Route */}
           </Routes>
         </main>
 
@@ -44,7 +46,8 @@ function App() {
         {/* Chatbot Bubble */}
         <div 
           onClick={toggleChatbot} 
-          className="fixed bottom-4 right-4 bg-[#97e7f5] text-[#36454F] p-4 rounded-full cursor-pointer shadow-lg"                         >
+          className="fixed bottom-4 right-4 bg-[#97e7f5] text-[#36454F] p-4 rounded-full cursor-pointer shadow-lg"
+        >
           <p>Mira.AI</p>
         </div>
 
