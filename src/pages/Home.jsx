@@ -3,99 +3,119 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200 to-teal-500 text-gray-700">
+    <div className="min-h-screen" style={{ backgroundColor: '#e0f7fa', color: '#333333' }}>
       {/* Hero Section */}
-      <div className="text-center pt-20 pb-10">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-blue-800 animate-pulse mb-4">
+      <div className="text-center pt-20 pb-12" style={{ backgroundColor: '#b2ebf2' }}>
+        <h1 className="text-4xl md:text-5xl font-semibold mb-4" style={{ color: '#333333' }}>
           Welcome to Flood Awareness Hub
         </h1>
-        <p className="text-lg md:text-xl mt-2 text-gray-700 animate-fadeIn">
+        <p className="text-md md:text-lg mt-2" style={{ color: '#4f4f4f' }}>
           Stay informed and prepared with real-time flood detection and alerts. Your safety is our priority.
         </p>
-        
         {/* Call-to-Action Button */}
         <div className="mt-6">
-          <button className="transition-transform transform hover:scale-110 bg-teal-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-700">
-            <Link to="/alerts" className="hover:underline">
-              Check Weather & Alerts
-            </Link>
-          </button>
+          <Link
+            to="/alerts"
+            className="px-6 py-3 rounded-md shadow-md hover:shadow-lg transition"
+            style={{
+              backgroundColor: '#333333',
+              color: '#ffffff',
+              transition: 'background-color 0.3s ease',
+            }}
+          >
+            Check Weather & Alerts
+          </Link>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="max-w-6xl mx-auto px-6 py-8 bg-gradient-to-r from-blue-100 via-teal-100 to-blue-200 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-center text-blue-800 mb-6">Our Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Feature 1 */}
-          <div className="p-4 bg-blue-50 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">Real-Time Alerts</h3>
-            <p className="text-sm text-gray-600">
-              Get notified immediately about potential flood risks in your area. Our advanced alert system ensures you stay updated at all times.
-            </p>
-          </div>
-          {/* Feature 2 */}
-          <div className="p-4 bg-blue-50 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">Weather Monitoring</h3>
-            <p className="text-sm text-gray-600">
-              Track weather patterns, rainfall levels, and river flow conditions with our accurate weather monitoring tools.
-            </p>
-          </div>
-          {/* Feature 3 */}
-          <div className="p-4 bg-blue-50 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">Community Support</h3>
-            <p className="text-sm text-gray-600">
-              Connect with emergency services, relief groups, and fellow community members during critical times.
-            </p>
-          </div>
-          {/* Feature 4 */}
-          <div className="p-4 bg-blue-50 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">Flood Risk Maps</h3>
-            <p className="text-sm text-gray-600">
-              Access interactive maps showing flood-prone areas, evacuation routes, and safe zones in your region.
-            </p>
-          </div>
-          {/* Feature 5 */}
-          <div className="p-4 bg-blue-50 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">Safety Guidelines</h3>
-            <p className="text-sm text-gray-600">
-              Learn how to prepare for floods, protect your family, and stay safe during emergencies with our comprehensive safety resources.
-            </p>
-          </div>
-          {/* Feature 6 */}
-          <div className="p-4 bg-blue-50 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
-            <h3 className="text-lg font-semibold text-blue-700 mb-2">Custom Alerts</h3>
-            <p className="text-sm text-gray-600">
-              Set preferences for alerts based on your location and risk levels. Tailor notifications to suit your needs.
-            </p>
-          </div>
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <h2 className="text-xl font-bold text-center mb-6" style={{ color: '#333333' }}>
+          Our Features
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Feature Card */}
+          {[
+            {
+              title: 'Real-Time Alerts',
+              description:
+                'Get notified immediately about potential flood risks in your area.',
+            },
+            {
+              title: 'Weather Monitoring',
+              description:
+                'Track weather patterns, rainfall levels, and river conditions accurately.',
+            },
+            {
+              title: 'Community Support',
+              description:
+                'Connect with emergency services and community relief groups.',
+            },
+            {
+              title: 'Flood Risk Maps',
+              description:
+                'Access interactive maps showing flood-prone areas and evacuation routes.',
+            },
+            {
+              title: 'Safety Guidelines',
+              description:
+                'Learn how to prepare for floods and protect your family effectively.',
+            },
+            {
+              title: 'Custom Alerts',
+              description:
+                'Set alert preferences based on location and risk levels.',
+            },
+          ].map((feature, index) => (
+            <div
+              key={index}
+              className="p-6 rounded-md shadow hover:shadow-lg transition-shadow"
+              style={{ backgroundColor: '#ffffff', color: '#333333' }}
+            >
+              <h3 className="text-lg font-medium mb-2">{feature.title}</h3>
+              <p className="text-sm" style={{ color: '#4f4f4f' }}>
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* About Section */}
-      <div className="max-w-5xl mx-auto px-6 py-10 bg-white shadow-lg rounded-lg mt-10">
-        <h2 className="text-2xl font-bold text-blue-800 text-center mb-6">About Flood Awareness Hub</h2>
-        <p className="text-gray-700 text-lg leading-relaxed">
-          At Flood Awareness Hub, our mission is to save lives by providing accurate, timely, and actionable information about flood risks. 
-          By leveraging the latest technology and data, we empower individuals and communities to make informed decisions and stay prepared.
-          Our platform is built with the vision of creating safer, more resilient communities across the globe.
-        </p>
-        <p className="text-gray-700 text-lg leading-relaxed mt-4">
-          Whether you are monitoring the weather, planning for emergencies, or seeking support during a flood, we are here to assist you at every step. 
-          Together, we can mitigate the impact of floods and ensure a safer future for everyone.
+      <div
+        className="max-w-5xl mx-auto px-6 py-8 rounded-md shadow-md mt-10"
+        style={{ backgroundColor: '#b2ebf2' }}
+      >
+        <h2 className="text-lg font-bold text-center mb-4" style={{ color: '#333333' }}>
+          About Flood Awareness Hub
+        </h2>
+        <p className="text-sm leading-relaxed" style={{ color: '#4f4f4f' }}>
+          At Flood Awareness Hub, our mission is to save lives by providing
+          accurate, timely, and actionable information about flood risks. By
+          leveraging the latest technology and data, we empower individuals and
+          communities to stay prepared. Our vision is to create safer, more
+          resilient communities worldwide.
         </p>
       </div>
 
       {/* Contact Section */}
-      <div className="bg-gradient-to-r from-blue-200 to-teal-300 py-8 mt-10">
+      <div className="py-8 mt-10" style={{ backgroundColor: '#333333' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Need Assistance?</h2>
-          <p className="text-lg text-white mb-6">
-            If you have any questions or need help, feel free to reach out to us. Our support team is available 24/7.
+          <h2 className="text-lg font-bold mb-4" style={{ color: '#ffffff' }}>
+            Need Assistance?
+          </h2>
+          <p className="text-sm mb-6" style={{ color: '#b2ebf2' }}>
+            If you have any questions or need help, feel free to reach out to
+            us. Our support team is available 24/7.
           </p>
           <Link
             to="/contact"
-            className="bg-teal-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-700 transition-transform transform hover:scale-110"
+            className="px-6 py-3 rounded-md shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+            style={{
+              backgroundColor: '#b2ebf2',
+              color: '#333333',
+              transition: 'transform 0.3s ease',
+            }}
           >
             Contact Us
           </Link>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Contact() {
   // State for form inputs
@@ -22,29 +23,31 @@ function Contact() {
 
   // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setSubmitted(true); // Set submission state to true
-    setFormData({ name: '', email: '', message: '' }); // Clear the form fields
-    // Add additional submission logic here if needed (e.g., API call)
+    e.preventDefault();
+    setSubmitted(true);
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
-    <div className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
-      <div className="max-w-4xl mx-auto">
-        {/* Page Title */}
-        <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-6">
+    <div className="min-h-screen" style={{ backgroundColor: '#e0f7fa', color: '#333333' }}>
+      {/* Page Title Section */}
+      <div className="text-center pt-20 pb-12" style={{ backgroundColor: '#b2ebf2' }}>
+        <h1 className="text-4xl md:text-5xl font-semibold mb-4" style={{ color: '#333333' }}>
           Contact Us & Safety Information
         </h1>
+      </div>
 
-        {/* Contact Form */}
+      {/* Contact Form */}
+      <div className="max-w-4xl mx-auto px-6 py-8">
         <form
-          className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto"
+          className="bg-white p-6 rounded-lg shadow-md"
           onSubmit={handleSubmit}
         >
-          <h2 className="text-2xl font-semibold text-blue-600 text-center mb-4">
+          <h2 className="text-2xl font-semibold text-center mb-4" style={{ color: '#333333' }}>
             Get in Touch
           </h2>
 
+          {/* Name Input */}
           <label className="block text-gray-700 font-medium">Name</label>
           <input
             type="text"
@@ -56,6 +59,7 @@ function Contact() {
             required
           />
 
+          {/* Email Input */}
           <label className="block text-gray-700 font-medium mt-4">Email</label>
           <input
             type="email"
@@ -67,6 +71,7 @@ function Contact() {
             required
           />
 
+          {/* Message Input */}
           <label className="block text-gray-700 font-medium mt-4">Message</label>
           <textarea
             name="message"
@@ -77,9 +82,13 @@ function Contact() {
             required
           ></textarea>
 
+          {/* Submit Button */}
           <button
             type="submit"
-            className="mt-6 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200"
+            className="mt-6 w-full bg-charcoal text-white py-2 rounded hover:bg-blue-500 transition duration-200"
+            style={{
+              backgroundColor: '#333333',
+            }}
           >
             Submit
           </button>
@@ -96,57 +105,22 @@ function Contact() {
 
         {/* Helpline Numbers */}
         <div className="bg-white p-6 rounded-lg shadow-md mt-10">
-          <h2 className="text-2xl font-semibold text-blue-600 mb-4">
-            Emergency Helplines in India
-          </h2>
-          <ul className="list-disc list-inside text-gray-800">
-            <li>
-              <strong>National Disaster Helpline:</strong> 1078
-            </li>
-            <li>
-              <strong>Police:</strong> 100
-            </li>
-            <li>
-              <strong>Ambulance:</strong> 102
-            </li>
-            <li>
-              <strong>Fire:</strong> 101
-            </li>
-            <li>
-              <strong>Flood Control Room:</strong> 1070
-            </li>
-            <li>
-              <strong>Child Helpline:</strong> 1098
-            </li>
-            <li>
-              <strong>Women Helpline:</strong> 181
-            </li>
+          <h2 className="text-2xl font-semibold text-charcoal mb-4">Emergency Helplines in India</h2>
+          <ul className="list-disc list-inside text-gray-700">
+            <li><strong>National Disaster Helpline:</strong> 1078</li>
+            <li><strong>Police:</strong> 100</li>
+            <li><strong>Ambulance:</strong> 102</li>
+            <li><strong>Fire:</strong> 101</li>
+            <li><strong>Flood Control Room:</strong> 1070</li>
+            <li><strong>Child Helpline:</strong> 1098</li>
+            <li><strong>Women Helpline:</strong> 181</li>
           </ul>
         </div>
+      </div>
 
-        {/* Flood Safety Tips */}
-        <div className="bg-white p-6 rounded-lg shadow-md mt-10">
-          <h2 className="text-2xl font-semibold text-blue-600 mb-4">
-            Flood Safety Tips
-          </h2>
-          <ul className="list-disc list-inside text-gray-800 space-y-2">
-            <li>Stay informed: Monitor weather updates and warnings through reliable sources.</li>
-            <li>
-              Prepare an emergency kit: Include water, food, flashlights, batteries, first aid, and
-              necessary medicines.
-            </li>
-            <li>Avoid floodwaters: Stay away from moving or stagnant floodwaters to avoid infections or drowning.</li>
-            <li>Turn off electricity: Switch off power sources if water starts entering your home.</li>
-            <li>Evacuate early: Move to higher ground as soon as you receive flood warnings.</li>
-            <li>Help vulnerable individuals: Assist children, elderly people, and those with disabilities.</li>
-            <li>Stay connected: Keep your mobile phone charged and maintain contact with local authorities.</li>
-          </ul>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-10 text-gray-600">
-          Stay safe and prepared. For any assistance, contact our helpline or fill out the form above.
-        </div>
+      {/* Footer Section */}
+      <div className="py-6 mt-10 text-center" style={{ backgroundColor: '#333333', color: '#ffffff' }}>
+        <p className="text-sm">Stay safe and prepared. For any assistance, contact our helpline or fill out the form above.</p>
       </div>
     </div>
   );
