@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Lottie from "lottie-react";
+import animationData from '../animations/Animation - 1733829926830.json';
 
 function Weather() {
   const [weather, setWeather] = useState(null);
@@ -27,18 +29,39 @@ function Weather() {
 
   return (
     <div className="min-h-screen bg-[#e0f7fa] p-6 flex items-center justify-center"> {/* Pale Blue Background */}
-      {/* Weather Card */}
-      <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg border border-gray-400">
-        <h2 className="text-3xl font-bold text-center text-[#333333] mb-4">Current Weather & Flood Alerts in Bangalore</h2>
+      {/* Main Weather Card */}
+      <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg border border-gray-400">
         
-        {error && <p className="text-red-600 text-center mb-4">{error}</p>}
+        {/* Lottie Animation - Positioned Above Text Content */}
+        <div className="w-full flex justify-center mb-4">
+          <div className="w-48 h-48 md:w-64 md:h-64">
+            <Lottie animationData={animationData} loop={true} />
+          </div>
+        </div>
 
+        {/* Header Section */}
+        <h2 className="text-3xl font-bold text-center text-[#333333] mb-4">
+          Current Weather & Flood Alerts in Bangalore
+        </h2>
+
+        {/* Error Display */}
+        {error && (
+          <p className="text-red-600 text-center mb-4">
+            {error}
+          </p>
+        )}
+
+        {/* Weather Data Display */}
         {weather ? (
           <div className="space-y-6">
             {/* Weather Info Box */}
             <div className="text-center bg-[#f0f8ff] p-4 rounded-lg shadow-md border border-[#666666]">
-              <p className="text-[#333333] text-lg font-semibold">Temperature: <span className="text-[#555555]">{weather.current.temp_c}°C</span></p>
-              <p className="text-[#666666] text-sm">Condition: <span className="text-[#555555]">{weather.current.condition.text}</span></p>
+              <p className="text-[#333333] text-lg font-semibold">
+                Temperature: <span className="text-[#555555]">{weather.current.temp_c}°C</span>
+              </p>
+              <p className="text-[#666666] text-sm">
+                Condition: <span className="text-[#555555]">{weather.current.condition.text}</span>
+              </p>
             </div>
 
             {/* Humidity & Wind Info Section */}

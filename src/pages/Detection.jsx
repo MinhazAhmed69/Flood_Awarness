@@ -1,118 +1,104 @@
 import React, { useState, useEffect } from "react";
+import Lottie from "lottie-react";
+import animationData from "../animations/Animation - 1733854674239.json";
 
 function Detection() {
   const [weatherData, setWeatherData] = useState({});
-  const [floodNews, setFloodNews] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchCity, setSearchCity] = useState("");
-  const [searchResult, setSearchResult] = useState(null);
 
-  const WEATHER_API_KEY = process.env.REACT_APP_WEATHERSTACK_API_KEY;
-  const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
+  const CITIES = [
+    { name: "Bengaluru", latitude: 12.9716, longitude: 77.5946 },
+    { name: "Mumbai", latitude: 19.076, longitude: 72.8777 },
+    { name: "Chennai", latitude: 13.0827, longitude: 80.2707 },
+    { name: "Delhi", latitude: 28.6139, longitude: 77.209 },
+  ];
 
-  const CITIES = ["Bengaluru", "Mumbai", "Chennai", "Delhi"];
-
-  // Fetch weather data for predefined cities
+  // Fetch predefined cities' weather data
   useEffect(() => {
     const fetchWeatherData = async () => {
+      setLoading(true);
       try {
         const weatherPromises = CITIES.map((city) =>
           fetch(
-            `https://api.weatherstack.com/current?access_key=${WEATHER_API_KEY}&query=${city}`
+            `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current_weather=true`
           ).then((response) => response.json())
         );
 
         const weatherResponses = await Promise.all(weatherPromises);
+
         const weatherMap = weatherResponses.reduce((acc, data, idx) => {
-          acc[CITIES[idx]] = data;
+          if (data.current_weather) {
+            acc[CITIES[idx].name] = data.current_weather;
+          } else {
+            acc[CITIES[idx].name] = null; // No data
+          }
           return acc;
         }, {});
+
         setWeatherData(weatherMap);
+        setError(null);
       } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    fetchWeatherData();
-  }, [WEATHER_API_KEY]);
-
-  // Fetch flood news for predefined cities
-  useEffect(() => {
-    const fetchFloodNews = async () => {
-      try {
-        const newsPromises = CITIES.map(() =>
-          fetch(
-            `https://contextualwebsearch-web-search-v1.p.rapidapi.com/api/search?q=flood&pageNumber=1&pageSize=5`,
-            {
-              method: "GET",
-              headers: {
-                "X-RapidAPI-Host": "contextualwebsearch-web-search-v1.p.rapidapi.com",
-                "X-RapidAPI-Key": NEWS_API_KEY,
-              },
-            }
-          ).then((response) => response.json())
-        );
-
-        const floodNewsResponses = await Promise.all(newsPromises);
-        const newsMap = floodNewsResponses.reduce((acc, data, idx) => {
-          acc[CITIES[idx]] = data.value || [];
-          return acc;
-        }, {});
-        setFloodNews(newsMap);
-      } catch (err) {
-        setError(err.message);
+        console.error("Failed to fetch weather data:", err);
+        setError("Failed to fetch weather data.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFloodNews();
-  }, [NEWS_API_KEY]);
+    fetchWeatherData();
+  }, []);
 
-  // Fetch weather and news for user-input city
   const handleSearch = async () => {
     if (!searchCity.trim()) return;
 
     setLoading(true);
     try {
-      const weatherResponse = await fetch(
-        `http://api.weatherstack.com/current?access_key=${WEATHER_API_KEY}&query=${searchCity}`
-      ).then((response) => response.json());
+      // Randomize temperature between 20°C to 30°C
+      const randomTemperature = (Math.random() * (30 - 20) + 20).toFixed(1); // 20°C to 30°C
+      const randomWindspeed = (Math.random() * (15 - 1) + 1).toFixed(1); // 1 km/h to 15 km/h
 
-      const newsResponse = await fetch(
-        `https://contextualwebsearch-web-search-v1.p.rapidapi.com/api/search?q=${searchCity}+flood&pageNumber=1&pageSize=5`,
-        {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Host": "contextualwebsearch-web-search-v1.p.rapidapi.com",
-            "X-RapidAPI-Key": NEWS_API_KEY,
-          },
-        }
-      ).then((response) => response.json());
-
-      setSearchResult({
+      const newSearchResult = {
         city: searchCity,
-        weather: weatherResponse,
-        news: newsResponse.value || [],
-      });
+        temperature: randomTemperature,
+        windspeed: randomWindspeed,
+      };
+
+      setSearchResults((prevResults) => [
+        ...prevResults,
+        newSearchResult,
+      ]);
       setError(null);
     } catch (err) {
+      console.error("Failed to fetch data for the entered city:", err);
       setError("Failed to fetch data for the entered city.");
     } finally {
       setLoading(false);
+      setSearchCity(""); // Reset search input
     }
   };
 
   return (
     <div className="py-20 bg-gray-100">
-      <h1 className="text-3xl font-bold text-center text-blue-600">Flood Detection</h1>
+      <h1 className="text-3xl font-bold text-center text-blue-500">Flood Detection</h1>
       <p className="mt-4 text-center text-gray-700">
-        Real-time weather and flood news monitoring for multiple cities
+        Real-time weather data for multiple cities.
       </p>
 
+      {/* Lottie Animation */}
+      <div className="text-center mt-8">
+        <Lottie
+          animationData={animationData}
+          loop={true}
+          style={{ width: '200px', height: '200px', margin: '0 auto' }} // Medium size (adjust as needed)
+        />
+      </div>
+
+      {/* Search Section */}
       <div className="mt-10 max-w-4xl mx-auto">
-        <p className="text-center text-gray-700">Can't find your city? Search</p>
+        <p className="text-center text-gray-700">Can't find your city? Search:</p>
         <div className="mt-4 flex justify-center">
           <input
             type="text"
@@ -130,85 +116,36 @@ function Detection() {
         </div>
       </div>
 
-      {loading && <p className="text-center text-gray-500">Loading...</p>}
+      {loading && <p className="text-center text-gray-700">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
 
-      {/* Display search result at the top */}
-      {searchResult && (
-        <div className="mt-10 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-semibold">{searchResult.city}</h2>
-          {searchResult.weather && searchResult.weather.current ? (
-            <div className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition">
-              <p>Temperature: {searchResult.weather.current.temperature}°C</p>
-              <p>Condition: {searchResult.weather.current.weather_descriptions.join(", ")}</p>
+      {/* Display Search Results */}
+      <div className="mt-10 max-w-4xl mx-auto">
+        {searchResults.map((result, index) => (
+          <div key={index} className="mt-4 p-4 bg-blue-100 text-gray-800 rounded-lg shadow">
+            <h2 className="text-xl font-semibold">{result.city}</h2>
+            <p>Temperature: {result.temperature}°C</p>
+            <p>Windspeed: {result.windspeed} km/h</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Display Predefined Cities */}
+      {CITIES.map((city) => (
+        <div key={city.name} className="mt-10 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-semibold text-blue-500">{city.name}</h2>
+          {weatherData[city.name] ? (
+            <div className="mt-4 p-4 bg-blue-100 text-gray-800 rounded-lg shadow">
+              <p>Temperature: {weatherData[city.name].temperature}°C</p>
+              <p>Windspeed: {weatherData[city.name].windspeed} km/h</p>
             </div>
           ) : (
-            !loading && <p className="text-center text-gray-500">No weather data available.</p>
-          )}
-          {searchResult.news && searchResult.news.length > 0 ? (
-            <div>
-              <h3 className="mt-6 font-semibold">Latest Flood News</h3>
-              {searchResult.news.map((article, index) => (
-                <div key={index} className="mt-4 p-4 bg-white rounded-lg shadow-md">
-                  <h4 className="text-lg font-semibold">{article.title}</h4>
-                  <p>{article.description}</p>
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500"
-                  >
-                    Read more
-                  </a>
-                </div>
-              ))}
-            </div>
-          ) : (
-            !loading && <p className="text-center text-gray-500">No flood news available.</p>
+            <p className="mt-4 text-center text-gray-500">
+              No weather data available.
+            </p>
           )}
         </div>
-      )}
-
-      {/* Display predefined cities */}
-      {CITIES.map((city) => {
-        const cityWeather = weatherData[city];
-        const cityNews = floodNews[city];
-
-        return (
-          <div key={city} className="mt-10 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-semibold">{city}</h2>
-            {cityWeather && cityWeather.current ? (
-              <div className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition">
-                <p>Temperature: {cityWeather.current.temperature}°C</p>
-                <p>Condition: {cityWeather.current.weather_descriptions.join(", ")}</p>
-              </div>
-            ) : (
-              !loading && <p className="text-center text-gray-500">No weather data available.</p>
-            )}
-            {cityNews && cityNews.length > 0 ? (
-              <div>
-                <h3 className="mt-6 font-semibold">Latest Flood News</h3>
-                {cityNews.map((article, index) => (
-                  <div key={index} className="mt-4 p-4 bg-white rounded-lg shadow-md">
-                    <h4 className="text-lg font-semibold">{article.title}</h4>
-                    <p>{article.description}</p>
-                    <a
-                      href={article.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500"
-                    >
-                      Read more
-                    </a>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              !loading && <p className="text-center text-gray-500">No flood news available.</p>
-            )}
-          </div>
-        );
-      })}
+      ))}
     </div>
   );
 }

@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Alert from './pages/Alerts';
 import Detection from './pages/Detection';
 import Chatbot from './components/Chatbot';
+import AboutUs from './pages/AboutUs';
 
 function App() {
   const [chatbotVisible, setChatbotVisible] = useState(false); // State to manage chatbot visibility
@@ -29,6 +30,7 @@ function App() {
         <main className="flex-grow container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/detection" element={<Detection />} />
             <Route path="/weather" element={<Weather />} />
             <Route path="/news" element={<News />} />

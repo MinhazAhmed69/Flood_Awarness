@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaExclamationTriangle } from 'react-icons/fa';
+import Lottie from "lottie-react";
+import animationData from '../animations/Animation - 1733853950285.json';
 
 function Alerts() {
   const [showSubscribePrompt, setShowSubscribePrompt] = useState(false);
@@ -30,7 +32,7 @@ function Alerts() {
           setSuccessMessage(true);
           new Notification('Subscription Successful!', {
             body: 'You are now subscribed to flood alerts.',
-            icon: 'https://via.placeholder.com/128', 
+            icon: 'https://via.placeholder.com/128', // Replace with your icon URL
           });
 
           setTimeout(() => setSuccessMessage(false), 4000);
@@ -49,7 +51,7 @@ function Alerts() {
     <div className="py-20 min-h-screen flex items-center justify-center">
       <div
         className="max-w-4xl bg-white shadow-lg rounded-lg p-8 md:p-12 w-full transition transform duration-500 ease-in-out hover:scale-105"
-        style={{ color: '#333333' }} // Set text color to charcoal
+        style={{ color: '#333333' }}
       >
         {/* Header Section */}
         <div className="flex items-center justify-start space-x-3 mb-6 border-b pb-4">
@@ -63,17 +65,21 @@ function Alerts() {
           and safety tips to prepare in case of emergencies.
         </p>
 
+        {/* Lottie Animation */}
+        <div className="mt-6 flex justify-center">
+          <div className="w-64">
+            <Lottie animationData={animationData} loop={true} />
+          </div>
+        </div>
+
         {/* Call-To-Action Section */}
         <div className="mt-6 flex justify-center md:justify-start gap-4">
-          {/* Subscribe Button */}
           <button
             onClick={handleSubscribeClick}
             className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition duration-300"
           >
             Subscribe for Alerts
           </button>
-
-          {/* Contact Support */}
           <button
             onClick={handleContactClick}
             className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition duration-300"
@@ -94,8 +100,8 @@ function Alerts() {
 
       {/* Subscribe Prompt */}
       {showSubscribePrompt && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-500 ease-in-out">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center animate-fade-in">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-500">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
             <h2 className="text-xl font-semibold text-blue-600 mb-4">Subscribe for Alerts</h2>
             <p className="text-gray-700 mb-4">
               Enter your email to receive real-time flood alerts and updates directly to your inbox.
@@ -120,8 +126,8 @@ function Alerts() {
 
       {/* Contact Prompt */}
       {showContactPrompt && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-500 ease-in-out">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center animate-fade-in">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-500">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
             <h2 className="text-xl font-semibold text-blue-600 mb-4">Contact Support</h2>
             <p className="text-gray-700 mb-4">
               Our support team is available to assist you with any flood-related inquiries. Call us or
@@ -140,7 +146,7 @@ function Alerts() {
       {/* Success Message */}
       {successMessage && (
         <div
-          className="fixed top-4 right-4 bg-green-100 border border-green-300 p-4 rounded shadow-lg transition transform duration-500 ease-in-out animate-fade-out"
+          className="fixed top-4 right-4 bg-green-100 border border-green-300 p-4 rounded shadow-lg transition duration-500"
           style={{ color: '#333333' }}
         >
           <p className="text-green-800 font-semibold">You have successfully subscribed!</p>

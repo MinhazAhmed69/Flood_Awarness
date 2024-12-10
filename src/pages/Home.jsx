@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Lottie from "lottie-react";
+import animationData from '../animations/Animation - 1733823846495.json';
 
 function Home() {
   const [raindrops, setRaindrops] = useState([]);
@@ -23,11 +25,11 @@ function Home() {
           key={i}
           style={{
             position: 'absolute',
-            top: '-10%', // Start slightly above the screen
+            top: '-10%',
             left: `${leftPosition}%`,
             width: `${size}px`,
             height: `${size * 8}px`,
-            backgroundColor: 'rgba(0, 0, 220, 0.5)', // Light blue raindrop
+            backgroundColor: 'rgba(0, 0, 255, 0.5)', 
             borderRadius: '50%',
             animation: `fall ${duration}s linear infinite`,
             animationDelay: `${delay}s`,
@@ -41,32 +43,40 @@ function Home() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e0f7fa', color: '#333333' }}>
-      {/* Raindrops */}
+      {/* Raindrops Overlay */}
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
         {raindrops}
       </div>
 
       {/* Hero Section */}
-      <div className="text-center pt-20 pb-12" style={{ backgroundColor: '#b2ebf2' }}>
-        <h1 className="text-4xl md:text-5xl font-semibold mb-4" style={{ color: '#333333' }}>
-          Welcome to Flood Awareness Hub
-        </h1>
-        <p className="text-md md:text-lg mt-2" style={{ color: '#4f4f4f' }}>
-          Stay informed and prepared with real-time flood detection and alerts. Your safety is our priority.
-        </p>
-        {/* Call-to-Action Button */}
-        <div className="mt-6">
-          <Link
-            to="/alerts"
-            className="px-6 py-3 rounded-md shadow-md hover:shadow-lg transition"
-            style={{
-              backgroundColor: '#333333',
-              color: '#ffffff',
-              transition: 'background-color 0.3s ease',
-            }}
-          >
-            Check Weather & Alerts
-          </Link>
+      <div className="flex items-center justify-between text-center pt-20 pb-12 px-6" style={{ backgroundColor: '#b2ebf2' }}>
+        {/* Lottie Animation */}
+        <div className="w-1/3 md:w-1/4">
+          <Lottie animationData={animationData} loop={true} />
+        </div>
+
+        {/* Title and Description */}
+        <div className="w-2/3 md:w-3/4 text-left pl-6">
+          <h1 className="text-4xl md:text-5xl font-semibold mb-4" style={{ color: '#333333' }}>
+            Welcome to Flood Awareness Hub
+          </h1>
+          <p className="text-md md:text-lg mt-2" style={{ color: '#4f4f4f' }}>
+            Stay informed and prepared with real-time flood detection and alerts. Your safety is our priority.
+          </p>
+          {/* Call-to-Action Button */}
+          <div className="mt-6">
+            <Link
+              to="/alerts"
+              className="px-6 py-3 rounded-md shadow-md hover:shadow-lg transition"
+              style={{
+                backgroundColor: '#333333',
+                color: '#ffffff',
+                transition: 'background-color 0.3s ease',
+              }}
+            >
+              Check Weather & Alerts
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -76,38 +86,13 @@ function Home() {
           Our Features
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Feature Card */}
           {[
-            {
-              title: 'Real-Time Alerts',
-              description:
-                'Get notified immediately about potential flood risks in your area.',
-            },
-            {
-              title: 'Weather Monitoring',
-              description:
-                'Track weather patterns, rainfall levels, and river conditions accurately.',
-            },
-            {
-              title: 'Community Support',
-              description:
-                'Connect with emergency services and community relief groups.',
-            },
-            {
-              title: 'Flood Risk Maps',
-              description:
-                'Access interactive maps showing flood-prone areas and evacuation routes.',
-            },
-            {
-              title: 'Safety Guidelines',
-              description:
-                'Learn how to prepare for floods and protect your family effectively.',
-            },
-            {
-              title: 'Custom Alerts',
-              description:
-                'Set alert preferences based on location and risk levels.',
-            },
+            { title: 'Real-Time Alerts', description: 'Get notified immediately about potential flood risks in your area.' },
+            { title: 'Weather Monitoring', description: 'Track weather patterns, rainfall levels, and river conditions accurately.' },
+            { title: 'Community Support', description: 'Connect with emergency services and community relief groups.' },
+            { title: 'Flood Risk Maps', description: 'Access interactive maps showing flood-prone areas and evacuation routes.' },
+            { title: 'Safety Guidelines', description: 'Learn how to prepare for floods and protect your family effectively.' },
+            { title: 'Custom Alerts', description: 'Set alert preferences based on location and risk levels.' },
           ].map((feature, index) => (
             <div
               key={index}
@@ -115,9 +100,7 @@ function Home() {
               style={{ backgroundColor: '#ffffff', color: '#333333' }}
             >
               <h3 className="text-lg font-medium mb-2">{feature.title}</h3>
-              <p className="text-sm" style={{ color: '#4f4f4f' }}>
-                {feature.description}
-              </p>
+              <p className="text-sm" style={{ color: '#4f4f4f' }}>{feature.description}</p>
             </div>
           ))}
         </div>
