@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  const [raindrops, setRaindrops] = useState([]);
+
+  useEffect(() => {
+    generateRaindrops();
+  }, []);
+
+  const generateRaindrops = () => {
+    const totalDrops = 100;
+    const drops = [];
+
+    for (let i = 0; i < totalDrops; i++) {
+      const delay = Math.random() * 2;
+      const duration = Math.random() * 3 + 2; // Random duration between 2s and 5s
+      const leftPosition = Math.random() * 100;
+      const width = Math.random() * 2 + 1; // Width of raindrops
+
+      drops.push(
+        <div
+          key={i}
+          className="absolute bg-blue-400 rounded-full"
+          style={{
+            left: `${leftPosition}%`,
+            width: `${width}px`,
+            height: `${Math.random() * 10 + 10}px`, // Random height for drops
+            animation: `fall ${duration}s linear infinite`,
+            animationDelay: `${delay}s`,
+          }}
+        />
+      );
+    }
+
+    setRaindrops(drops);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200 to-teal-500 text-gray-700">
+    <div className="min-h-screen bg-gradient-to-br from-blue-200 to-teal-500 text-gray-700 relative overflow-hidden">
+      {/* Rain Effect */}
+      <div className="absolute top-0 left-0 w-full h-full z-10">{raindrops}</div>
+
       {/* Hero Section */}
       <div className="text-center pt-20 pb-10">
         <h1 className="text-5xl md:text-6xl font-extrabold text-blue-800 animate-pulse mb-4">
@@ -12,7 +49,7 @@ function Home() {
         <p className="text-lg md:text-xl mt-2 text-gray-700 animate-fadeIn">
           Stay informed and prepared with real-time flood detection and alerts. Your safety is our priority.
         </p>
-        
+
         {/* Call-to-Action Button */}
         <div className="mt-6">
           <button className="transition-transform transform hover:scale-110 bg-teal-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-teal-700">
