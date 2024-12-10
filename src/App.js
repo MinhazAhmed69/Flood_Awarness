@@ -8,35 +8,29 @@ import News from './pages/News';
 import Map from './pages/MapComponent';
 import Contact from './pages/Contact';
 import Alert from './pages/Alerts';
-import Detection from './pages/Detection';
+import Detection from './pages/Detection';  {/* Include the Detection route */}
 
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 to-teal-50">
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 to-teal-50 relative">
         {/* Navbar */}
         <Navbar />
 
-        {/* Main Content Area with Routing */}
+        {/* Main Content Area */}
         <main className="flex-grow container mx-auto px-4 py-8">
           <Routes>
-            {/* Route for Home */}
             <Route path="/" element={<Home />} />
-            {/* Route for Weather */}
-            <Route path="/detection" element={< Detection/>} />
+            <Route path="/detection" element={<Detection />} />  {/* Keep the Detection route */}
             <Route path="/weather" element={<Weather />} />
-            {/* Route for News */}
             <Route path="/news" element={<News />} />
-            {/* Route for Map */}
             <Route path="/map" element={<Map />} />
-            {/* Route for Contact */}
             <Route path="/contact" element={<Contact />} />
-            {/* Route for Alerts */}
             <Route path="/alerts" element={<Alert />} />
           </Routes>
         </main>
 
-        {/* Footer Section */}
+        {/* Footer */}
         <Footer />
       </div>
     </Router>
